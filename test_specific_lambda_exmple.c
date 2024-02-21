@@ -3,7 +3,7 @@
 #include <dlfcn.h> // For dlclose
 
 int main() {
-    LambdaFunction first = load_lambda_function("exmple_function.c","-DID=1");
+    Lambda_Example_Function first = make_example_lambda(1);
     if (!first.handle || !first.func) {
         fprintf(stderr, "Failed to load or find the function in the first instance\n");
         // If handle is valid but func is not, we still need to close the handle
@@ -11,7 +11,7 @@ int main() {
         return 1; // Exit with an error
     }
 
-    LambdaFunction second = load_lambda_function("exmple_function.c","-DID=3");
+    Lambda_Example_Function second = make_example_lambda(2);
     if (!second.handle || !second.func) {
         fprintf(stderr, "Failed to load or find the function in the second instance\n");
         if (first.handle) dlclose(first.handle); // Clean up the first before exiting
@@ -20,10 +20,10 @@ int main() {
     }
 
     // Call the functions via their pointers
-    int result1 = ((int (*)())first.func)();
-    int result2 = ((int (*)())second.func)();
+    int result1 = first.func();
+    int result2 = second.func();
 
-    printf("id=1 gives %d, id=3 gives %d\n", result1, result2);
+    printf("id=1 gives %d, id=2 gives %d\n", result1, result2);
 
     // Clean up: Close the handles
     if (first.handle) dlclose(first.handle);

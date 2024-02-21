@@ -1,3 +1,3 @@
-int get_id(){
+int lambda(){
 	return ID;
 }

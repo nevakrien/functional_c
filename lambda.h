@@ -5,6 +5,15 @@
 #include <stdio.h>
 
 char* get_unique_name();
+
+
+typedef struct {
+    void* handle; // Handle to the dynamically-loaded library
+    void* func;   // Generic pointer to any function
+} LambdaFunction;
+LambdaFunction load_lambda_function(const char* source_file, const char* define_string);
+
+//specific implementation	
 typedef struct {
     void* handle;              // Handle to the dynamically-loaded library
     int (*func)();             // Corrected function pointer type
