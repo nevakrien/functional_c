@@ -26,8 +26,8 @@ int main() {
     printf("id=1 gives %d, id=2 gives %d\n", result1, result2);
 
     // Clean up: Close the handles
-    if (first.handle) dlclose(first.handle);
-    if (second.handle) dlclose(second.handle);
+    dlclose(first.handle);
+    dlclose(second.handle);
 
     return 0;
 }
